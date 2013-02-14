@@ -1,0 +1,25 @@
+/newpost?topic=Movies&url=www%2Eimdb%2Ecom
+/newpost?topic=Cool Site for Music&url=www%2Emtv%2Ecom
+/newpost?topic=Hungry? Go here!&url=www%2EAllRecipes%2Ecom
+/newpost?topic=Search&url=www%2Egoogle%2Ecom
+/newpost?topic=Connect with old friends:&url=www%2Efacebook%2Ecom
+
+/newreply?reply=COOL!&parent=p1
+/newreply?reply=I%20hate%20it&parent=p2
+/newreply?reply=is%20that%20all?&parent=p3
+/newreply?reply=I've%20seen%20this%20before.%20Meh.&parent=p5
+/newreply?reply=Are%20you%20serious?!%20That sux!!!&parent=p1r1
+/newreply?reply=I'm%20always%20serious&parent=p1r1r1
+/newreply?reply=loser&parent=p1r1r1r1
+/newreply?reply=Ditto&parent=p2r1
+/newreply?reply=Very%20cool!&parent=p3
+
+/vote?reply=p1r1r1r1
+/vote?reply=p1r1r1r1
+/vote?reply=p1r1r1r1
+/vote?reply=p2r1
+/vote?reply=p2r1
+/vote?reply=p2r1
+/vote?reply=p2r1
+/vote?reply=p1r1
+/vote?reply=p3

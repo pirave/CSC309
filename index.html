@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<script src="./js/jquery.js" type="text/javascript"></script>
+		<link rel="stylesheet" href="style.css" type="text/css" />
+		<link href='http://fonts.googleapis.com/css?family=Arvo:400,700' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
+		<title>postIT</title>
+	</head>
+	<body>
+		<div id="wrapper">
+			<h3 id="title" >postIT</h3>
+			<h5 id="subtitle" >sharing is caring</h3>
+			<div id="create-wrapper">
+				<input type="text" placeholder="Give your new post a title!" id="txtPost" maxlength="140"></input>
+				<input type="text" placeholder="Enter in URL" id="txtURL"></input>
+				<button type="submit" class="btn" id="btnPost">Post</button>
+				<button id="btnSort">sort posts</button>
+			</div>
+			
+			<div id = "posts-wrapper">
+			</div>
+
+
+			<button id="btnHelp">I need help :(</button>
+			<div id="about" style="display:none">
+				<h2> Welcome to postIT </h2>
+				<p>Instructions on how to use our forum is as follows.</p>
+				<p><b>POST</b></p>
+					<p style="padding-left:10px">To post a new topic, enter topic information into the left textbox and it's corresponding URL. Click Post.</p>
+					<p style="padding-left:10px">To view your post, scroll down to bottom all the existing POSTS. Clicking the topic information will redirect you to it's URL.</p>
+					<p style="padding-left:10px">When visiting our page, all existing posts will be sorted by it's votes, and time. To resort after a new post click on the 'sort posts' button.</p>
+				<p><b>REPLY</b></p>
+					<p style="padding-left:10px">To reply to a post or reply, click on the reply button. Enter text into the new text box and click comment. If you do not wish to reply, click cancel. You may only reply to one post or reply at a time. Your reply should automatically appear in the list of replies.</p>
+					<p style="padding-left:10px">To view a posts replies, click on it's corresponding comment button located to the right of each post. All replies will be displayed by votes then time. To collapse the replies, click the comments button again.</p>
+					<p style="padding-left:10px">To resort the replies after you have commented, please close and reopen the replies by clicking the comment button.</p>
+				<p><b>VOTE</b></p>
+					<p style="padding-left:10px">To vote a reply up, click the upwards arrow button to the left of the reply<p>
+				<p><b>API Calls</b></p>
+					<p style="padding-left:10px"><tt>/posts</tt></p>
+					<p style="padding-left:40px">Will retrieve a JSON feed of all posts and it's information.</p>
+					<p style="padding-left:10px"><tt>/replies?post=[id]</tt></p>
+					<p style="padding-left:40px">Will retrieve a JSON feed of all replies and it's information for the requested post id.</p>
+					<p style="padding-left:10px"><tt>/newpost?topic=[text]&url=[url]</tt></p>
+					<p style="padding-left:40px">Will create a new post with text for the topic and url for the link. Will return JSON of the newly created post and it's information.</p>
+					<p style="padding-left:10px"><tt>/newreply?reply=[text]&parent=[id]</tt></p>
+					<p style="padding-left:40px">Will create a new reply for the parent with the given id. Will return a JSON of the newly created reply and it's information.</p>
+					<p style="padding-left:10px"><tt>/vote?reply=[id]</tt></p>
+					<p style="padding-left:40px">Will increase the vote points for reply with the given id, and it's parent.</p>
+				<p><b>References</b></p>
+					<p style="padding-left:10px">Kiessling, Manuel. The Node Beginner Book. N.p.: Leanpub, 2012. Digital Print.</p>
+			</div>
+		</div>
+	</body>
+	<script src = "./js/scripts.js"></script>
+</html>

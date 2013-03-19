@@ -1,0 +1,74 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+	<title>My Page</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+	<script>
+	$(document).ready(function(){
+	
+		$("#btn1").click(function(){
+			$("#MSG").html("POO!");
+		});
+
+		$(function() {
+		  /* 
+			Bind an event to window.orientationchange that, when the device is turned, 
+			gets the orientation and displays it to on screen.
+		   */
+		  $(window).on( 'orientationchange', orientationChangeHandler );
+		 
+		  function orientationChangeHandler( event ) {
+			$( "#MSG" ).html( "This device is in " + event.orientation + " mode!" );
+
+			if(event.orientation == 'portrait') {
+				$("#main_content").attr({"class":"ui-grid-solo"});
+				$("#A").attr({"class":"ui-block-a", "data-role":"content"});				
+				$("#B").attr({"class":"ui-block-a", "data-role":"content"});				
+			} else if(event.orientation == 'landscape') {
+				$("#main_content").attr("class","ui-grid-a");
+				$("#A").attr({"data-role":"content","class":"ui-block-a"});				
+				$("#B").attr({"data-role":"content","class":"ui-block-b"});				
+			}
+		  }
+		  // Force event on load.
+		  $(window).orientationchange();
+		}); 
+		
+	});
+	</script>
+
+</head> 
+<body> 
+
+<div data-role="page" data-theme="a">
+
+	<div data-role="header">
+		<h1>My Title</h1>
+	</div>
+
+	<div id="main_content">
+		<div id="A">	
+			<p id=MSG >Hello world</p>
+			<a href="#" data-role="button" data-icon="star">Star button</a>		
+		</div>
+		<div id="B">
+			<br>
+			<ul data-role="listview" data-inset="true" data-filter="true">
+			<br>
+				<li><a href="#">Acura</a></li>
+				<li><a href="#">Audi</a></li>
+				<li><a href="#">BMW</a></li>
+				<li><a href="#">Cadillac</a></li>
+				<li><a href="#">Ferrari</a></li>
+			</ul>
+		</div>
+	</div><!-- end main_content >
+
+
+</div><!-- /page -->
+
+</body>
+</html>

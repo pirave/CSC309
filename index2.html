@@ -15,7 +15,9 @@
 				var tweets = [];
 
 				for(var i in data) {
-					tweets.push("<li><a href='#' data-theme='a'>" +data[i].id+"</a></li>");
+					tweets.push("<li>" + 
+								"<img src=" + data[i].user.profile_image_url_https + ">" + 
+								"<a href='#' data-theme='a'>" + data[i].text + "</a></li>");
 					}
 				
 			$("#tweetlist").append(tweets.join('')).listview('refresh');					

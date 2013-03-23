@@ -61,30 +61,44 @@ function parseTweet(tweet){
 	//Get index of "http:"
 	var indexA = tweet.search("http:"); //Need to be http || https
 
+	//The tweet contains a link
 	if(indexA==-1){
 	
 		site = null;
 
+	//The tweet does not contain a link
 	} else {
 	
-		//Splice string "tweet" from http
+		//Splice string "tweet" from http onward
 		var substr = tweet.slice(indexA,tweet.length);
 
+		//Escape special characters
+		var esc_substr = escape(substr);
+
 		//Get index of empty space
-		console.log("A: " + tweet);
-		console.log("B:" + substr.indexOf(" "));
-		console.log("C:" + substr.indexOf("\\"));
+		console.log("A: " + escape(substr));
+		space_index = esc_substr.indexOf("%20");
+		line_index = esc_substr.indexOf("%0A");
 
-		//Problem: Cannot grab newline character in tweet from SarahPrevette
-		//If you can grab it, you must still ensure it isn't -1 before taking min
-
-//		var indexB = Math.min(substr.indexOf(" "),substr.indexOf("\\"));
-		var indexB = substr.indexOf(" ");
-
-		if(indexB==-1){
+		//If there is nothing after the URL
+		if(space_index==-1 && line_index==-1) {
 			site = substr;
+
+		//If there is no new line after the URL
+		} else if (line_index==-1) {
+			//Use space_index to splice
+			site = unescape(esc_substr.slice(0,space_index));
+
+		//If there is no blank space after the URL
+		} else if (space_index==-1) {
+			//Use line index to splice
+			site = unescape(esc_substr.slice(0,line_index));
+
+		//There is a new line and blank space after the URL
 		} else {
-			site = substr.slice(0,indexB);
+			//Use the minimum index to slice string
+			indexB = Math.min(space_index,line_index);
+			site = unescape(esc_substr.slice(0,indexB));
 		}
 	}
 

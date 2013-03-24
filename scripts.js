@@ -7,7 +7,7 @@ $(document).ready(function(){
 	  $(window).on( 'orientationchange', orientationChangeHandler );
 	 
 	  function orientationChangeHandler( event ) {
-		$( "#MSG" ).html( "This device is in " + event.orientation + " mode!" );
+		$( "#MSG" ).html( "This device is in " + event.orientation + " mode!" ); //Remove later
 
 		if(event.orientation == 'portrait') {
 			$("#main_content").attr({"class":"ui-grid-solo"});
@@ -32,28 +32,39 @@ $("#btn1").click(function(){
 		for(var i in data) {
 
 			var ref_website = parseTweet(data[i].text);
-			console.log(ref_website);
 
-			if(ref_website==null) {
-				tweets.push("<li>" + 
-							"<img src=" + data[i].user.profile_image_url_https + ">" +
-							"<div data-role='collapsible'>" +
-							"<h3>" + data[i].user.name + "</h3>" +
-							"<p>" +	data[i].text + "</p></div></li>");
-			} else {
-				tweets.push("<li>" + 
-							"<a href='" + ref_website + "' data-icon='star' target='_blank' data-theme='a'>" +
-							"<img src=" + data[i].user.profile_image_url_https + ">" +
-							"<div data-role='collapsible'>" +
-							"<h3>" + data[i].user.name + "</h3>" +
-							"<p>" +	data[i].text + "</p></div></a></li>");
-			}
+			var user_info = parseUserInfo(data[i].user);
 
+			tweets.push("<li>" + 
+						"<a href='" + ref_website + "' data-icon='star' target='_blank' data-theme='a'>" +
+						"<img src=" + data[i].user.profile_image_url_https + ">" +
+						"<h3>" + data[i].user.name + "</h3>" +
+						"<p>" +	data[i].text + "</p>" +
+						"<p id='p" + i +"' style='display:none'>" + user_info + "</p></a>" +
+						"<a id='b" + i + "' class='togglebtn' href='javascript:void(0)'></a></li>");
 		}
 		
 	$("#tweetlist").append(tweets.join('')).listview('refresh');					
 	});
 });
+
+$("#tweetlist").on('click', '.togglebtn', function(){
+
+	var btnid = this.id;
+	console.log(btnid);
+	var pid = "#p" + btnid.slice(1,btnid.length);
+	console.log(pid);
+
+	$(pid).slideToggle();
+
+});
+
+function parseUserInfo(user) {
+
+	return 	"<br>Bio: " + user.description +
+			"<br><br>Location: " + user.location;
+
+}
 
 function parseTweet(tweet){
 
@@ -64,7 +75,7 @@ function parseTweet(tweet){
 	//The tweet contains a link
 	if(indexA==-1){
 	
-		site = null;
+		site = "#";
 
 	//The tweet does not contain a link
 	} else {
@@ -76,7 +87,6 @@ function parseTweet(tweet){
 		var esc_substr = escape(substr);
 
 		//Get index of empty space
-		console.log("A: " + escape(substr));
 		space_index = esc_substr.indexOf("%20");
 		line_index = esc_substr.indexOf("%0A");
 

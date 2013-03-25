@@ -1,3 +1,9 @@
+/* Global variables*/
+var PageNO = 0;
+var showPerPage = 5;
+number_of_pages = 0
+
+
 $(document).ready(function(){
 	$(function() {
 	  /* 
@@ -23,8 +29,8 @@ $(document).ready(function(){
 	  $(window).orientationchange();
 	}); 
 });
-
-$("#btn1").click(function(){
+/*
+$("#btnLoad").click(function(){
 	$.getJSON("favs.json",function (data) {
 
 		var tweets = [];
@@ -46,6 +52,49 @@ $("#btn1").click(function(){
 		
 	$("#tweetlist").append(tweets.join('')).listview('refresh');					
 	});
+});
+*/
+$("#btnLoad").click(function(){
+	$.getJSON("favs.json",function (data) {
+		var number_of_items = data.length;
+		var tweets = [];
+		tweets = GetTweets(data, PageNO, showPerPage)
+	$("#tweetlist").append(tweets.join('')).listview('refresh');
+	CreateNav(number_of_items);
+	});
+});
+
+$('#page_navigation').on('click', '#btnNav', function () {
+//$("#btnNav").click(function(){
+	PageNO = $(this).attr("name");
+	var limit = 5 + (5 * PageNO)
+	$.getJSON("favs.json",function (data) {
+	$(".test").remove();
+	$("#tweetlist").append(GetTweets(data, PageNO, limit).join('')).listview('refresh');
+	
+	});
+});
+
+$('#page_navigation').on('click', '#btnPrev', function () {
+	if (PageNO > 0) {
+		$.getJSON("favs.json",function (data) {
+			PageNO = PageNO -1
+			var limit = 5 + (5 * PageNO)
+			$(".test").remove();
+			$("#tweetlist").append(GetTweets(data, PageNO, limit).join('')).listview('refresh')
+		});
+	}
+});
+
+$('#page_navigation').on('click', '#btnNext', function () {
+	if (PageNO < number_of_pages -1 ) {
+		$.getJSON("favs.json",function (data) {
+			PageNO = PageNO +1
+			var limit = 5 + (5 * PageNO)
+			$(".test").remove();
+			$("#tweetlist").append(GetTweets(data, PageNO, limit).join('')).listview('refresh')
+		});
+	}
 });
 
 $("#tweetlist").on('click', '.togglebtn', function(){
@@ -113,4 +162,36 @@ function parseTweet(tweet){
 	}
 
 	return site;
+}
+
+
+function GetTweets(data, PageNO, limit){
+	var tweets = [];
+	for(i = 5 * PageNO ; i < limit ;i++){
+		var ref_website = parseTweet(data[i].text);
+		var user_info = parseUserInfo(data[i].user);
+		tweets.push("<li class='test'>" + 
+		"<a href='" + ref_website + "' data-icon='star'  data-transition='pop' data-theme='a'>" +
+		"<img src=" + data[i].user.profile_image_url_https + ">" +
+		"<h3>" + data[i].user.name + "</h3>" +
+		"<p>" +	data[i].text + "</p>" +
+		"<p id='p" + i +"' style='display:none'>" + user_info + "</p></a>" +
+		"<a id='b" + i + "' class='togglebtn' href='javascript:void(0)'></a></li>");
+	}
+	return tweets;
+}
+	
+function CreateNav(NoItems){ 
+	number_of_pages = Math.ceil(NoItems/showPerPage);
+	var navigation_html = '<a id = "btnPrev" data-corners="false" data-role="button" data-theme="a" class="previous_link" data-icon="arrow-l">Prev</a>';  
+	var current_link = 0;  
+	while(number_of_pages > current_link){  
+		navigation_html += '<a data-theme="a" id = "btnNav" data-corners="false" data-role="button" class="page_link" name="' + current_link +'">'+ (current_link + 1) +'</a>';  
+		current_link++;  
+	}  
+	navigation_html += '<a id = "btnNext" data-corners="false" data-role="button" data-theme="a" ="next_link" data-icon="arrow-r">Next</a>';  
+	//navigation_html = '<a href="index.html" data-role="button" data-icon="plus">Add</a>'
+		  
+	$('#page_navigation').append(navigation_html);  
+			$("#page_navigation").trigger('create');
 }

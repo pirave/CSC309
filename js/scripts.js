@@ -1,197 +1,211 @@
-/* Global variables*/
-var PageNO = 0;
-var showPerPage = 5;
-number_of_pages = 0
+/* Global Variables */
+var tweetsData = new Array();
+var pgsize = 5;
 
+/*                                  HOME Page                                *\
+\*===========================================================================*/
 
-$(document).ready(function(){
-	$(function() {
-	  /* 
-		Bind an event to window.orientationchange that, when the device is turned, 
-		gets the orientation and displays it to on screen.
-	   */
-	  $(window).on( 'orientationchange', orientationChangeHandler );
-	 
-	  function orientationChangeHandler( event ) {
-		$( "#MSG" ).html( "This device is in " + event.orientation + " mode!" ); //Remove later
+$( document ).on('pageinit', function(){
 
-		if(event.orientation == 'portrait') {
-			$("#main_content").attr({"class":"ui-grid-solo"});
-			$("#A").attr({"class":"ui-block-a", "data-role":"content"});				
-			$("#B").attr({"class":"ui-block-a", "data-role":"content"});				
-		} else if(event.orientation == 'landscape') {
-			$("#main_content").attr("class","ui-grid-a");
-			$("#A").attr({"data-role":"content","class":"ui-block-a"});				
-			$("#B").attr({"data-role":"content","class":"ui-block-b"});				
-		}
-	  }
-	  // Force event on load.
-	  $(window).orientationchange();
-	}); 
-});
-/*
-$("#btnLoad").click(function(){
-	$.getJSON("favs.json",function (data) {
+/*****************************************************************************
+  Orientation Change 
+ *****************************************************************************/
+     
+    /* 
+      Bind an event to window.orientationchange that, when the device is turned, 
+      gets the orientation and displays it to on screen.
+     */
+    $( window ).on( 'orientationchange', orientationChangeHandler );
 
-		var tweets = [];
+    function orientationChangeHandler( event ) {
+        if(event.orientation == 'portrait') 
+            $( "#imgBird" ).css( "width", "100%" );
+        else 
+            $( "#imgBird" ).css( "width", "50%" );
+    }
+    // Force event on load.
+    $( window ).orientationchange();
 
-		for(var i in data) {
-
-			var ref_website = parseTweet(data[i].text);
-
-			var user_info = parseUserInfo(data[i].user);
-
-			tweets.push("<li>" + 
-						"<a href='" + ref_website + "' data-icon='star' target='_blank' data-theme='a'>" +
-						"<img src=" + data[i].user.profile_image_url_https + ">" +
-						"<h3>" + data[i].user.name + "</h3>" +
-						"<p>" +	data[i].text + "</p>" +
-						"<p id='p" + i +"' style='display:none'>" + user_info + "</p></a>" +
-						"<a id='b" + i + "' class='togglebtn' href='javascript:void(0)'></a></li>");
-		}
-		
-	$("#tweetlist").append(tweets.join('')).listview('refresh');					
-	});
-});
-*/
-$("#btnLoad").click(function(){
-	$.getJSON("favs.json",function (data) {
-		var number_of_items = data.length;
-		var tweets = [];
-		tweets = GetTweets(data, PageNO, showPerPage)
-	$("#tweetlist").append(tweets.join('')).listview('refresh');
-	CreateNav(number_of_items);
-	});
+/*****************************************************************************
+  Main Menu Popup
+ *****************************************************************************/
+    
+    $( "#popupMenu" ).on({
+        popupbeforeposition: function() {
+            var h = $( window ).height();
+            $( "#popupMenu" ).css( "height", h );
+        }
+    });
 });
 
-$('#page_navigation').on('click', '#btnNav', function () {
-//$("#btnNav").click(function(){
-	PageNO = $(this).attr("name");
-	var limit = 5 + (5 * PageNO)
-	$.getJSON("favs.json",function (data) {
-	$(".test").remove();
-	$("#tweetlist").append(GetTweets(data, PageNO, limit).join('')).listview('refresh');
-	
-	});
+/*****************************************************************************
+  Get Tweets
+ *****************************************************************************/
+    
+    function tweet(data){
+        this.date = data.created_at;
+        this.id = data.id;
+        this.text = data.text;
+        this.source = data.source;
+        this.replyTo = data.in_reply_to_screen_name;
+        this.user = {
+            name: data.user.screen_name,
+            fullname: data.user.name,
+            info: data.user.description,
+            location: data.user.location,
+            followers: data.user.followers_count,
+            photo: data.user.profile_image_url.replace("normal","bigger")
+        };
+        this.retweets = data.retweet_count;
+        this.favourites = data.favourite_count;
+        this.urls = data.entities.urls;
+        this.user_mentions = data.entities.user_mentions;
+        this.hashtags = data.entities.hashtags;
+        this.link = exists(this.urls[0], 0) ? this.urls[0].url : '#';
+    }
+
+    $.getJSON("favs-more.json",function (data) {
+        tweetsData = new Array();
+        $.each(data, function(i, tw){
+            tweetsData[i] = new tweet(tw);
+        });
+    });
+
+/*                                  FAVS PAGE                                *\
+\*===========================================================================*/
+
+$( "#favs" ).on('pageinit', function(){
+    //alert('initialized');
 });
 
-$('#page_navigation').on('click', '#btnPrev', function () {
-	if (PageNO > 0) {
-		$.getJSON("favs.json",function (data) {
-			PageNO = PageNO -1
-			var limit = 5 + (5 * PageNO)
-			$(".test").remove();
-			$("#tweetlist").append(GetTweets(data, PageNO, limit).join('')).listview('refresh')
-		});
-	}
+$( "#favs" ).on('pagebeforeshow', function(){
+    //alert("beforeshow");
+    GetTweets(1);
 });
 
-$('#page_navigation').on('click', '#btnNext', function () {
-	if (PageNO < number_of_pages -1 ) {
-		$.getJSON("favs.json",function (data) {
-			PageNO = PageNO +1
-			var limit = 5 + (5 * PageNO)
-			$(".test").remove();
-			$("#tweetlist").append(GetTweets(data, PageNO, limit).join('')).listview('refresh')
-		});
-	}
-});
 
-$("#tweetlist").on('click', '.togglebtn', function(){
+/*                                  HOW TO PAGE                              *\
+\*===========================================================================*/
 
-	var btnid = this.id;
-	console.log(btnid);
-	var pid = "#p" + btnid.slice(1,btnid.length);
-	console.log(pid);
+/*                                  ABOUT US PAGE                            *\
+\*===========================================================================*/
 
-	$(pid).slideToggle();
 
-});
+/*****************************************************************************
+  Helper Functions
+ *****************************************************************************/
 
-function parseUserInfo(user) {
+function GetTweets( pg ){
+    var tweets = tweetsData.slice( (pg - 1) * pgsize, (pg - 1) * pgsize + pgsize );
 
-	return 	"<br>Bio: " + user.description +
-			"<br><br>Location: " + user.location;
+    // ******* REMOVE!!!!! AFTER PAGINATION !!! **********
+    var tweets = tweetsData;
 
+    if ( tweets ) {
+        // Get the page we are going to dump our content into.
+        var $page = $( '#favs' ),
+            $header = $page.children( ":jqmData(role=header)" ),
+            $content = $page.children( ":jqmData(role=content)" ),
+            $ul = $( '#tweetlist' ),
+            markupLI = "",
+            markupPOPUP = "";
+
+        // Generate a list item for each tweet in the range
+        // and add it to our markup.
+        $.each( tweets, function ( i, tweet ){
+            markupLI += 
+                "<li id='" + tweet.id + "'>"+
+                    "<a href='#'>" + 
+                    "<img class='profilePic' src=" + tweet.user.photo + ">" +
+                    "<h2>@" + tweet.user.name + "</h2>" +
+                    "<p>" + styleText(tweet) + "</p>" +
+                    "<a href='#info-" + tweet.id + "' data-rel='popup' data-position-to='window' " + 
+                        "data-transition='pop' data-rel='back' class='tweetInfo'>More Info" + 
+                    "</a>" + 
+                "</li>";
+
+            markupPOPUP += 
+                "<div data-role='popup' id='info-" + tweet.id + "' data-theme='d' data-overlay-theme='a' class='ui-content' style='max-width:340px; padding-bottom:2em;' data-rel='back'>" +
+                    "<a href='#' data-rel='back' data-role='button' data-theme='a' data-icon='delete' data-iconpos='notext' class='ui-btn-right'>Close</a>" + 
+                    "<p>" +
+                        "<span class='spnPopupUserName'>" + tweet.user.fullname + "</span>" +
+                        "<span class='spnPopupUserHandle'> @" + tweet.user.name + "</span>" +
+                        "<span class='spnPopupUserFls'> | " +  tweet.user.followers + " followers</span>" +
+                    "</p>" +
+                    "<p class='popupTweet'>" + styleText(tweet) + "</p>" +
+                    "<span class='spnPopupTime'>" +  parseDate(tweet.date) + "</span>" + 
+                        "<div class='divPopupFooter'>" +
+                            "<span class='spnPopupStats'>" +
+                                "<strong>" + tweet.retweets + "</strong> RETWEETS &nbsp;" +
+                                "<strong>"+ exists(tweet.favourites, 1) + "</strong> FAVOURITES" +
+                            "</span>";
+            if (tweet.link != '#')
+                markupPOPUP +=
+                            "<span class='spnPopupOpen'>" +
+                                "<a class='btnOpen' data-role='button' data-theme='c' data-icon='forward' data-mini='true' data-inline='true' href='" + this.link + "' target='_blank'>open</a>" +
+                            "</span>";
+                        
+            markupPOPUP += "</div></div>";
+        });
+
+        // Find the h1 element in our header and inject the name of"
+        // the category into it.
+        $header.find( "h1" ).html( "Page " + pg );
+
+        // Inject the category items markup into the content element.
+        $ul.html( markupLI ).listview("refresh");
+
+        // Inject the popup
+        //var popup ='<div data-role="popup" id="info" data-history="true" data-theme="d" data-overlay-theme="a" class="ui-content" style="max-width:340px; padding-bottom:2em;" data-rel="back"><a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a> <p> <span class="spnPopupUserName">Tim O\'Reilly</span> <span class="spnPopupUserHandle"> @timoreilly</span> <span class="spnPopupUserFls"> | 19016 followers</span> </p> <p class="popupTweet"> How to Create an Early <span class="spnPopupLink">#Stage</span> Pitch Deck <span class="spnPopupLink">http://t.co/TdYB5I6xBl</span> (Great advice from <span class="spnPopupLink">@ryanspoon</span> ) </p> <span class="spnPopupTime">9:29 PM - 21 Feb 12</span> <div class="divPopupFooter"> <span class="spnPopupStats"> <strong>2,411</strong> RETWEETS &nbsp; <strong>733</strong> FAVOURITES</span> <span class="spnPopupOpen"> <a class="btnOpen" data-role="button" data-theme="c" data-icon="forward" data-mini="true" data-inline="true" href="http://google.ca" target="_blank">open</a> </span> </div></div>';
+        $content.append(markupPOPUP).trigger("create");
+
+        // Enhance Page
+        $page.page();
+
+        // Enhance the listview we just injected.
+        $ul.listview();
+
+        // Enchance the popup we just injected.
+        $content.find( ":jqmData(role=popup)" ).popup();
+    }
 }
 
-function parseTweet(tweet){
-
-	var site;
-	//Get index of "http:"
-	var indexA = tweet.search("http:"); //Need to be http || https
-
-	//The tweet contains a link
-	if(indexA==-1){
-	
-		site = "#";
-
-	//The tweet does not contain a link
-	} else {
-	
-		//Splice string "tweet" from http onward
-		var substr = tweet.slice(indexA,tweet.length);
-
-		//Escape special characters
-		var esc_substr = escape(substr);
-
-		//Get index of empty space
-		space_index = esc_substr.indexOf("%20");
-		line_index = esc_substr.indexOf("%0A");
-
-		//If there is nothing after the URL
-		if(space_index==-1 && line_index==-1) {
-			site = substr;
-
-		//If there is no new line after the URL
-		} else if (line_index==-1) {
-			//Use space_index to splice
-			site = unescape(esc_substr.slice(0,space_index));
-
-		//If there is no blank space after the URL
-		} else if (space_index==-1) {
-			//Use line index to splice
-			site = unescape(esc_substr.slice(0,line_index));
-
-		//There is a new line and blank space after the URL
-		} else {
-			//Use the minimum index to slice string
-			indexB = Math.min(space_index,line_index);
-			site = unescape(esc_substr.slice(0,indexB));
-		}
-	}
-
-	return site;
+function styleText(tweet){
+    var indices = new Array(),
+        text = tweet.text,
+        links = tweet.urls.concat(tweet.user_mentions, tweet.hashtags);
+    $.each(links, function(i, url){
+        indices.push(url.indices)
+    });
+    indices.sort(function(a,b){return b[1]-a[1]});
+    $.each(indices, function(i, index){
+        text = text.wrapSpan(index[0],index[1]);
+    });
+    return text;
 }
 
+String.prototype.wrapSpan = function (x, y) {
+    if (x >= 0)
+        return this.substring(0, x) + '<span class="spnLight">' + this.substring(x, y) + '</span>' + this.substring(y, this.length);
+    else
+        return this;
+};
 
-function GetTweets(data, PageNO, limit){
-	var tweets = [];
-	for(i = 5 * PageNO ; i < limit ;i++){
-		var ref_website = parseTweet(data[i].text);
-		var user_info = parseUserInfo(data[i].user);
-		tweets.push("<li class='test'>" + 
-		"<a href='" + ref_website + "' data-icon='star'  data-transition='pop' data-theme='a'>" +
-		"<img src=" + data[i].user.profile_image_url_https + ">" +
-		"<h3>" + data[i].user.name + "</h3>" +
-		"<p>" +	data[i].text + "</p>" +
-		"<p id='p" + i +"' style='display:none'>" + user_info + "</p></a>" +
-		"<a id='b" + i + "' class='togglebtn' href='javascript:void(0)'></a></li>");
-	}
-	return tweets;
-}
-	
-function CreateNav(NoItems){ 
-	number_of_pages = Math.ceil(NoItems/showPerPage);
-	var navigation_html = '<a id = "btnPrev" data-corners="false" data-role="button" data-theme="a" class="previous_link" data-icon="arrow-l">Prev</a>';  
-	var current_link = 0;  
-	while(number_of_pages > current_link){  
-		navigation_html += '<a data-theme="a" id = "btnNav" data-corners="false" data-role="button" class="page_link" name="' + current_link +'">'+ (current_link + 1) +'</a>';  
-		current_link++;  
-	}  
-	navigation_html += '<a id = "btnNext" data-corners="false" data-role="button" data-theme="a" ="next_link" data-icon="arrow-r">Next</a>';  
-	//navigation_html = '<a href="index.html" data-role="button" data-icon="plus">Add</a>'
-		  
-	$('#page_navigation').append(navigation_html);  
-			$("#page_navigation").trigger('create');
+function exists( obj, def ){
+    if (typeof obj === "undefined") 
+       return def;
+   return obj;
+};
+
+function parseDate(twitter_date){      
+    var date = new Date(Date.parse(twitter_date)).toString().substr(0, 21);
+
+    // format time
+    var HH = date.substr(-5, 2);
+    var time = (HH<12 ? HH : HH-12) + date.substr(-3) + (HH<12 ? ' AM' : ' PM');
+
+    // formate day
+    day = date.substr(8, 2) + ' ' + date.substr(4, 3) + ' ' + date.substr(13, 2);
+
+    return time + ' - ' + day;
 }

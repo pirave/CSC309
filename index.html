@@ -1,33 +1,93 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html> 
 <head> 
 	<title>Tweet'kl Stars</title> 
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
-	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css"/>
-	<script src="js/jquery.js"></script>
-	<script src="js/jquery.mobile.js"></script>
+	<link rel="stylesheet" type="text/css" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.css">
+	<link rel="stylesheet" href="css/jquery.mobile.custom.css" />  <!-- GRAPHITE -->
+	<link rel="stylesheet" href="css/style.css" />
+	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
 </head> 
 <body> 
 
-<div data-role="page" data-theme="a">
+<div data-role="page" id="home" class="jqm-demos">
+	<div data-role="content">
+		<h1> Welcome To Tweet'kl Stars </h1>
 
-	<div data-role="header">
+		<img src="css/images/Twitter_Bird.svg" id="imgBird"/>
+
+		<div data-role="popup" id="popupMenu" data-corners="false" data-theme="none" data-shadow="false" data-tolerance="0,0">
+
+		    <a href="#favs" data-icon="star" data-theme="c" data-role="button" id="btnFavs">Start</a>
+		    <a href="#howto" data-icon="info" data-theme="c" data-role="button">Instructions</a>
+		    <a href="#about" data-icon="gear" data-theme="c" data-role="button">About</a>
+			 
+		</div>
+	</div><!-- /content -->
+	<div data-role="footer" data-position="fixed" class="ui-btn-active ui-state-persist">	
+		<ul class="ui-navbar" id="listMenu"><li>
+			<a id = "btnMenu" href="#popupMenu" data-rel="popup" data-transition="slide" data-position-to="window" data-icon="grid" data-role="button" class="ui-btn" data-role="button">Menu</a>
+		</li></ul>
+	</div><!-- /footer -->
+</div><!-- /page -->
+	
+
+<div data-role="page" id="favs">
+
+	<div data-role="header" data-position="fixed">
+		<a href="#home" data-role="button" data-transition="slidefade" data-direction="reverse">Home</a>
 		<h1>Tweet'kl Stars</h1>
-	</div>
+	</div><!-- /header -->
 
-	<div id="main_content">
-		<div id="A">	
-			<p id=MSG >Hello world</p>
-			<a href="#" id="btnLoad" data-role="button" data-icon="add" data-corners="false">Load Starred Tweets</a>
-		</div>
+	<div data-role="content">
 
-		<div id="B">
-			<br>
-			<ul id="tweetlist" data-role="listview" data-split-icon="info"></ul>
-		</div>
-	</div>
-<div id='page_navigation' data-role="controlgroup" data-type="horizontal" class="ui-bar" ></div>
-</div>
+		<ul id="tweetlist" data-role="listview" data-split-icon="gear" data-split-theme="d"></ul>
+
+	</div><!-- /content -->
+
+	<div data-role="footer" data-position="fixed" class="ui-bar">
+		<input data-theme="d" type="range" name="slider-fill" id="slider-fill" value="60" min="0" max="100" data-highlight="true" data-track-theme="d"/>
+	</div><!-- /footer -->
+
+</div><!-- /page -->
+
+<div data-role="page" id="about">
+
+	<div data-role="header" data-position="fixed">
+		<a href="#home" data-role="button" data-transition="slidefade" data-direction="reverse">Home</a>
+		<h1>Tweet'kl Stars</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		
+	</div><!-- /content -->
+
+	<div data-role="footer" data-position="fixed">
+		<div data-role="navbar">
+        <ul>
+          <li><a href="#" data-icon="arrow-u" class="ui-btn-active ui-state-persist">Karthig</a></li>
+          <li><a href="#" data-icon="arrow-u">Malithi</a></li>
+          <li><a href="#" data-icon="arrow-u">Pirave</a></li>
+        </ul>
+      </div>
+	</div><!-- /footer -->
+
+</div><!-- /page -->
+
+<div data-role="page" id="howto">
+
+	<div data-role="header" data-position="fixed">
+		<a href="#home" data-role="button" data-transition="slidefade" data-direction="reverse">Home</a>
+		<h1>Tweet'kl Stars</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">	
+	
+	</div><!-- /content -->
+
+</div><!-- /page -->
+
+<script src="js/scripts.js"></script>
 </body>
-<script src = "js/scripts.js"></script>
 </html>

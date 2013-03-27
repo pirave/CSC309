@@ -12,6 +12,10 @@ div.ui-slider { margin-left: 1%; width: 96%; }
 
 #favs div.ui-btn-active { background: #e0e0e0; }
 
+.fixedPosition {
+ position: fixed;
+}
+
 .spnLight {
 	color: #72c6ae /*{a-body-link-color}*/;
 	font-weight: bold;

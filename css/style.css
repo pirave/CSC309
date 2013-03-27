@@ -12,10 +12,6 @@ div.ui-slider { margin-left: 1%; width: 96%; }
 
 #favs div.ui-btn-active { background: #e0e0e0; }
 
-.fixedPosition {
- position: fixed;
-}
-
 .spnLight {
 	color: #72c6ae /*{a-body-link-color}*/;
 	font-weight: bold;
@@ -102,6 +98,7 @@ div.ui-slider { margin-left: 1%; width: 96%; }
 	cursor: pointer;
 	width: 100% !important;
 	text-decoration: none;
+	padding: 15px;
 }
 #listMenu{
 	list-style-type: none;
@@ -118,5 +115,11 @@ div.ui-slider { margin-left: 1%; width: 96%; }
 .ui-grid-a .ui-block-b { width: 70%; } 
 
 #tweetlist, a.tweetInfo{
+	margin: 0px !important;
+}
+.fixedPosition {
+	position: fixed;
+}
+#home ul{
 	margin: 0px !important;
 }

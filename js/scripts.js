@@ -1,6 +1,7 @@
 /* Global Variables */
 var tweetsData = new Array();
 var pgsize = 5;
+var PAGE = 1;
 
 $( document ).on('pageinit', function(){
     //
@@ -89,8 +90,8 @@ $( "#favs" ).on('pageinit', function(){
  *****************************************************************************/
 
     $("#footer" ).bind('mouseup touchend',function() {
-        PageNO = $("#slider").val();
-        GetTweets(PageNO)
+        PAGE = $("#slider").val();      // set global variable
+        GetTweets(PAGE);
     });
 
 /*****************************************************************************
@@ -104,28 +105,42 @@ $( "#favs" ).on('pageinit', function(){
     $( window ).on( 'orientationchange', orientationChangeHandler );
 
     function orientationChangeHandler( event ) {
+        GetTweets(PAGE);
         if(event.orientation == 'portrait')  {
             $('#custom-grid .ui-block-b').css('display','none');            
             $('#custom-grid').removeClass('ui-grid-a').addClass('ui-grid-solo');
-            $('img.profilePic').css('display','block'); 
-            $('#custom-grid li').addClass('ui-li-has-thumb');
         } else {
-            if ($(window).width() < 600 ){
-                $('img.profilePic').css('display','none'); 
-                $('#custom-grid li').removeClass('ui-li-has-thumb');
-            }
-                //alert('small!');
             $('#custom-grid .ui-block-b').css('display','block');           
             $('#custom-grid').removeClass('ui-grid-solo').addClass('ui-grid-a');
         }
     }
+
+/*****************************************************************************
+  iFrame Open 
+ *****************************************************************************/
+
+    $('#iframe').attr('height', Math.floor(Math.min($(window).height(), $(window).width())*.9)); //90% of height
+
+    $('#favs').on('click',".iframe", function( event ) {
+        //event.preventDefault();
+        if($(window).height() < $(window).width()){
+            href = $(this).attr('href');
+            if ( href != '#' )
+                //$('#divIFrame').html('<iframe src="#"></iframe>').trigger('create');
+                alert(href);
+            //else
+                //$('#divIFrame').html('nothing to display');
+            //return false;
+        }
+    });
+
 });
 
 $( "#favs" ).on('pagebeforeshow', function(){
     //alert("beforeshow");
     pgsize = Math.ceil(($(window).height())/ 100);
 	SetSliderRange();
-    GetTweets(1);
+    GetTweets(PAGE);
 
     // Force event on load.
     $( window ).orientationchange();
@@ -163,8 +178,8 @@ function GetTweets( pg ){
         $.each( tweets, function ( i, tweet ){
             markupLI += 
                 "<li id='" + tweet.id + "'>"+
-                    "<a href='#'>" + 
-                    "<img class='profilePic' src=" + tweet.user.photo + ">" +
+                    "<a href='" + this.link + "' class='iframe' target='iframe'>" +
+                    ((Math.abs(window.orientation) != 90 || screen.height > 600) ? "<img class='profilePic' src=" + tweet.user.photo + ">" : '') +
                     "<h2>@" + tweet.user.name + "</h2>" +
                     "<p>" + styleText(tweet) + "</p>" +
                     "<a href='#info-" + tweet.id + "' data-rel='popup' data-position-to='window' " + 

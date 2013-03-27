@@ -92,6 +92,33 @@ $( "#favs" ).on('pageinit', function(){
         PageNO = $("#slider").val();
         GetTweets(PageNO)
     });
+
+/*****************************************************************************
+  Orientation Change 
+ *****************************************************************************/
+     
+    /* 
+      Bind an event to window.orientationchange that, when the device is turned, 
+      gets the orientation and displays it to on screen.
+     */
+    $( window ).on( 'orientationchange', orientationChangeHandler );
+
+    function orientationChangeHandler( event ) {
+        if(event.orientation == 'portrait')  {
+            $('#custom-grid .ui-block-b').css('display','none');            
+            $('#custom-grid').removeClass('ui-grid-a').addClass('ui-grid-solo');
+            $('img.profilePic').css('display','block'); 
+            $('#custom-grid li').addClass('ui-li-has-thumb');
+        } else {
+            if ($(window).width() < 600 ){
+                $('img.profilePic').css('display','none'); 
+                $('#custom-grid li').removeClass('ui-li-has-thumb');
+            }
+                //alert('small!');
+            $('#custom-grid .ui-block-b').css('display','block');           
+            $('#custom-grid').removeClass('ui-grid-solo').addClass('ui-grid-a');
+        }
+    }
 });
 
 $( "#favs" ).on('pagebeforeshow', function(){
@@ -99,6 +126,9 @@ $( "#favs" ).on('pagebeforeshow', function(){
 	SetSliderRange();
 	pgsize = Math.ceil(($(window).height())/ 100);
     GetTweets(1);
+
+    // Force event on load.
+    $( window ).orientationchange();
 });
 
 

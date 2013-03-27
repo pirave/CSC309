@@ -109,3 +109,10 @@ div.ui-slider { margin-left: 1%; width: 96%; }
 	background-color: transparent;
 	box-shadow: none;
 }
+#favsContent { padding: 0px; }
+.ui-grid-a .ui-block-a { width: 30%; }
+.ui-grid-a .ui-block-b { width: 70%; } 
+
+#tweetlist, a.tweetInfo{
+	margin: 0px !important;
+}

@@ -74,7 +74,7 @@ $( "#home" ).on('pagebeforeshow', function(){
         else 
             $( "#imgBird" ).css( "width", "50%" );
     }
-    
+
     // Force event on load.
     $( window ).orientationchange();
 });
@@ -91,7 +91,7 @@ $( "#favs" ).on('pageinit', function(){
     $("#footer" ).bind('mouseup touchend',function() {
         PageNO = $("#slider").val();
         GetTweets(PageNO)
-    }); alert("set footer");
+    });
 });
 
 $( "#favs" ).on('pagebeforeshow', function(){

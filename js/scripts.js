@@ -2,29 +2,14 @@
 var tweetsData = new Array();
 var pgsize = 5;
 
+$( document ).on('pageinit', function(){
+    //
+});
+
 /*                                  HOME Page                                *\
 \*===========================================================================*/
 
-$( document ).on('pageinit', function(){
-
-/*****************************************************************************
-  Orientation Change 
- *****************************************************************************/
-     
-    /* 
-      Bind an event to window.orientationchange that, when the device is turned, 
-      gets the orientation and displays it to on screen.
-     */
-    $( window ).on( 'orientationchange', orientationChangeHandler );
-
-    function orientationChangeHandler( event ) {
-        if(event.orientation == 'portrait') 
-            $( "#imgBird" ).css( "width", "100%" );
-        else 
-            $( "#imgBird" ).css( "width", "50%" );
-    }
-    // Force event on load.
-    $( window ).orientationchange();
+$( "#home" ).on('pageinit', function(){ 
 
 /*****************************************************************************
   Main Menu Popup
@@ -36,21 +21,11 @@ $( document ).on('pageinit', function(){
             $( "#popupMenu" ).css( "height", h );
         }
     });
-});
-
-/*****************************************************************************
-  Slider
- *****************************************************************************/
-
-$("#footer" ).bind('mouseup touchend',function() {
-	PageNO = $("#slider-fill").val();
-	GetTweets(PageNO)
-});
 
 /*****************************************************************************
   Get Tweets
  *****************************************************************************/
-    
+
     function tweet(data){
         this.date = data.created_at;
         this.id = data.id;
@@ -79,18 +54,50 @@ $("#footer" ).bind('mouseup touchend',function() {
             tweetsData[i] = new tweet(tw);
         });
     });
+});
+
+$( "#home" ).on('pagebeforeshow', function(){ 
+
+/*****************************************************************************
+  Orientation Change 
+ *****************************************************************************/
+     
+    /* 
+      Bind an event to window.orientationchange that, when the device is turned, 
+      gets the orientation and displays it to on screen.
+     */
+    $( window ).on( 'orientationchange', orientationChangeHandler );
+
+    function orientationChangeHandler( event ) {
+        if(event.orientation == 'portrait') 
+            $( "#imgBird" ).css( "width", "100%" );
+        else 
+            $( "#imgBird" ).css( "width", "50%" );
+    }
+    
+    // Force event on load.
+    $( window ).orientationchange();
+});
 
 /*                                  FAVS PAGE                                *\
 \*===========================================================================*/
 
 $( "#favs" ).on('pageinit', function(){
-    //alert('initialized');
+
+/*****************************************************************************
+  Slider
+ *****************************************************************************/
+
+    $("#footer" ).bind('mouseup touchend',function() {
+        PageNO = $("#slider").val();
+        GetTweets(PageNO)
+    }); alert("set footer");
 });
 
 $( "#favs" ).on('pagebeforeshow', function(){
     //alert("beforeshow");
 	SetSliderRange();
-	pgsize = Math.ceil(($(window).height())/ 100)
+	pgsize = Math.ceil(($(window).height())/ 100);
     GetTweets(1);
 });
 
@@ -167,7 +174,6 @@ function GetTweets( pg ){
         $ul.html( markupLI ).listview("refresh");
 
         // Inject the popup
-        //var popup ='<div data-role="popup" id="info" data-history="true" data-theme="d" data-overlay-theme="a" class="ui-content" style="max-width:340px; padding-bottom:2em;" data-rel="back"><a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a> <p> <span class="spnPopupUserName">Tim O\'Reilly</span> <span class="spnPopupUserHandle"> @timoreilly</span> <span class="spnPopupUserFls"> | 19016 followers</span> </p> <p class="popupTweet"> How to Create an Early <span class="spnPopupLink">#Stage</span> Pitch Deck <span class="spnPopupLink">http://t.co/TdYB5I6xBl</span> (Great advice from <span class="spnPopupLink">@ryanspoon</span> ) </p> <span class="spnPopupTime">9:29 PM - 21 Feb 12</span> <div class="divPopupFooter"> <span class="spnPopupStats"> <strong>2,411</strong> RETWEETS &nbsp; <strong>733</strong> FAVOURITES</span> <span class="spnPopupOpen"> <a class="btnOpen" data-role="button" data-theme="c" data-icon="forward" data-mini="true" data-inline="true" href="http://google.ca" target="_blank">open</a> </span> </div></div>';
         $content.append(markupPOPUP).trigger("create");
 
         // Enhance Page
@@ -222,7 +228,6 @@ function parseDate(twitter_date){
 }
 
 function SetSliderRange(){ 
-	Nopages = Math.ceil(tweetsData.length/pgsize);
-	//var SlideHtml = '<input name="slider-2" id="slider-2" min="0" max='+ (Nopages+1) +' value="0" data-show-value="true" type="range">' 
-	$('#slider-fill').attr('max', Nopages); 
+	numPages = Math.ceil(tweetsData.length/pgsize);
+	$('#slider').attr('max', numPages); 
 }

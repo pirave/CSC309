@@ -1,7 +1,6 @@
 /* Global Variables */
 var tweetsData = new Array();
 var pgsize = 5;
-var noTweets = 0;
 
 /*                                  HOME Page                                *\
 \*===========================================================================*/
@@ -76,7 +75,6 @@ $("#footer" ).bind('mouseup touchend',function() {
 
     $.getJSON("favs-more.json",function (data) {
         tweetsData = new Array();
-		noTweets = data.length
         $.each(data, function(i, tw){
             tweetsData[i] = new tweet(tw);
         });
@@ -91,7 +89,7 @@ $( "#favs" ).on('pageinit', function(){
 
 $( "#favs" ).on('pagebeforeshow', function(){
     //alert("beforeshow");
-	SetSliderRange(noTweets);
+	SetSliderRange();
 	pgsize = Math.ceil(($(window).height())/ 100)
     GetTweets(1);
 });
@@ -223,8 +221,8 @@ function parseDate(twitter_date){
     return time + ' - ' + day;
 }
 
-function SetSliderRange(NoItems){ 
-	Nopages = Math.ceil(NoItems/pgsize);
+function SetSliderRange(){ 
+	Nopages = Math.ceil(tweetsData.length/pgsize);
 	//var SlideHtml = '<input name="slider-2" id="slider-2" min="0" max='+ (Nopages+1) +' value="0" data-show-value="true" type="range">' 
 	$('#slider-fill').attr('max', Nopages); 
 }

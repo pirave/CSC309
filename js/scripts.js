@@ -123,8 +123,8 @@ $( "#favs" ).on('pageinit', function(){
 
 $( "#favs" ).on('pagebeforeshow', function(){
     //alert("beforeshow");
+    pgsize = Math.ceil(($(window).height())/ 100);
 	SetSliderRange();
-	pgsize = Math.ceil(($(window).height())/ 100);
     GetTweets(1);
 
     // Force event on load.

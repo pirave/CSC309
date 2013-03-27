@@ -5,6 +5,7 @@ var PAGE = 1;
 
 $( document ).on('pageinit', function(){
     //
+
 });
 
 /*                                  HOME Page                                *\
@@ -138,7 +139,7 @@ $( "#favs" ).on('pageinit', function(){
 
 $( "#favs" ).on('pagebeforeshow', function(){
     //alert("beforeshow");
-    pgsize = Math.ceil(($(window).height())/ 100);
+    pgsize = Math.floor((Math.min($(window).height(), $(window).width())/ 100));
 	SetSliderRange();
     GetTweets(PAGE);
 
@@ -159,7 +160,8 @@ $( "#favs" ).on('pagebeforeshow', function(){
  *****************************************************************************/
 
 function GetTweets( pg ){
-    var tweets = tweetsData.slice( (pg - 1) * pgsize, (pg - 1) * pgsize + pgsize );
+    var offset = $(window).height() < $(window).width() ? pgsize : Math.floor($(window).height()/90);
+    var tweets = tweetsData.slice( (pg - 1) * pgsize, (pg - 1) * pgsize + offset );
 
     // ******* REMOVE!!!!! AFTER PAGINATION !!! **********
     //var tweets = tweetsData;

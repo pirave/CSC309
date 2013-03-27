@@ -1,6 +1,7 @@
 /* Global Variables */
 var tweetsData = new Array();
 var pgsize = 5;
+var noTweets = 0;
 
 /*                                  HOME Page                                *\
 \*===========================================================================*/
@@ -39,6 +40,15 @@ $( document ).on('pageinit', function(){
 });
 
 /*****************************************************************************
+  Slider
+ *****************************************************************************/
+
+$("#footer" ).bind('mouseup touchend',function() {
+	PageNO = $("#slider-fill").val();
+	GetTweets(PageNO)
+});
+
+/*****************************************************************************
   Get Tweets
  *****************************************************************************/
     
@@ -66,6 +76,7 @@ $( document ).on('pageinit', function(){
 
     $.getJSON("favs-more.json",function (data) {
         tweetsData = new Array();
+		noTweets = data.length
         $.each(data, function(i, tw){
             tweetsData[i] = new tweet(tw);
         });
@@ -80,6 +91,8 @@ $( "#favs" ).on('pageinit', function(){
 
 $( "#favs" ).on('pagebeforeshow', function(){
     //alert("beforeshow");
+	SetSliderRange(noTweets);
+	pgsize = Math.ceil(($(window).height())/ 100)
     GetTweets(1);
 });
 
@@ -99,7 +112,7 @@ function GetTweets( pg ){
     var tweets = tweetsData.slice( (pg - 1) * pgsize, (pg - 1) * pgsize + pgsize );
 
     // ******* REMOVE!!!!! AFTER PAGINATION !!! **********
-    var tweets = tweetsData;
+    //var tweets = tweetsData;
 
     if ( tweets ) {
         // Get the page we are going to dump our content into.
@@ -208,4 +221,10 @@ function parseDate(twitter_date){
     day = date.substr(8, 2) + ' ' + date.substr(4, 3) + ' ' + date.substr(13, 2);
 
     return time + ' - ' + day;
+}
+
+function SetSliderRange(NoItems){ 
+	Nopages = Math.ceil(NoItems/pgsize);
+	//var SlideHtml = '<input name="slider-2" id="slider-2" min="0" max='+ (Nopages+1) +' value="0" data-show-value="true" type="range">' 
+	$('#slider-fill').attr('max', Nopages); 
 }

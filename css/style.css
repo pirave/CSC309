@@ -5,6 +5,13 @@ body {
     font-family: "Open Sans" !important;
     font-weight: normal !important;
   }
+  
+div.ui-slider { margin-left: 1%; width: 96%; }
+
+#favs div.ui-btn-down-d { background: #fff; }
+
+#favs div.ui-btn-active { background: #e0e0e0; }
+
 .spnLight {
 	color: #72c6ae /*{a-body-link-color}*/;
 	font-weight: bold;

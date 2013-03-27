@@ -110,9 +110,11 @@ $( "#favs" ).on('pageinit', function(){
         if(event.orientation == 'portrait')  {
             $('#custom-grid .ui-block-b').css('display','none');            
             $('#custom-grid').removeClass('ui-grid-a').addClass('ui-grid-solo');
+            $('#divTweetList').removeClass('fixedPosition');
         } else {
             $('#custom-grid .ui-block-b').css('display','block');           
             $('#custom-grid').removeClass('ui-grid-solo').addClass('ui-grid-a');
+            $('#divTweetList').addClass('fixedPosition');
         }
     }
 

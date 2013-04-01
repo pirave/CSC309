@@ -89,11 +89,11 @@ $( "#favs" ).on('pageinit', function(){
 /*****************************************************************************
   Slider
  *****************************************************************************/
-
-    $("#footer" ).bind('mouseup touchend',function() {
-        PAGE = $("#slider").val();      // set global variable
-        GetTweets(PAGE);
-    });
+	
+	$( "#slider" ).on( "slidestop", function( event, ui ) {
+	 PAGE = $("#slider").val();      // set global variable
+     GetTweets(PAGE);
+	} );
 
 /*****************************************************************************
   Orientation Change 
@@ -128,20 +128,15 @@ $( "#favs" ).on('pageinit', function(){
         //event.preventDefault();
         if($(window).height() < $(window).width()){
             href = $(this).attr('href');
-            if ( href != '#' )
-                //$('#divIFrame').html('<iframe src="#"></iframe>').trigger('create');
-                alert(href);
-            //else
-                //$('#divIFrame').html('nothing to display');
-            //return false;
         }
     });
 
+
 });
+// math
 
 $( "#favs" ).on('pagebeforeshow', function(){
-    //alert("beforeshow");
-    pgsize = Math.floor((Math.min($(window).height(), $(window).width())/ 100));
+    pgsize = Math.ceil((Math.min($(window).height(), $(window).width())) * 0.01)
 	SetSliderRange();
     GetTweets(PAGE);
 
@@ -150,19 +145,12 @@ $( "#favs" ).on('pagebeforeshow', function(){
 });
 
 
-/*                                  HOW TO PAGE                              *\
-\*===========================================================================*/
-
-/*                                  ABOUT US PAGE                            *\
-\*===========================================================================*/
-
-
 /*****************************************************************************
   Helper Functions
  *****************************************************************************/
 
 function GetTweets( pg ){
-    var offset = $(window).height() < $(window).width() ? pgsize : Math.floor($(window).height()/90);
+    var offset = $(window).height() < $(window).width() ? pgsize : Math.floor($(window).height()/100);
     var tweets = tweetsData.slice( (pg - 1) * pgsize, (pg - 1) * pgsize + offset );
 
     // ******* REMOVE!!!!! AFTER PAGINATION !!! **********
@@ -278,5 +266,11 @@ function parseDate(twitter_date){
 
 function SetSliderRange(){ 
 	numPages = Math.ceil(tweetsData.length/pgsize);
-	$('#slider').attr('max', numPages); 
+	$('#slider').attr('max', numPages);
+	$("#slider" ).addClass( "ui-disabled" );
+	//document.getElementById('ui-slider-input').disabled = true;
+$( '#slider' ).slider({
+  stop: function( event, ui ) {}
+});
+	
 }

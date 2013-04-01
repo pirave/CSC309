@@ -12,6 +12,53 @@ div.ui-slider { margin-left: 1%; width: 96%; }
 
 #favs div.ui-btn-active { background: #e0e0e0; }
 
+#favs input.ui-disabled{
+	   opacity:1;
+	   
+    }
+
+#howto p{
+padding-left:10px;
+}	
+#howto p.title{
+	
+	font-size:1.1em;
+	text-align:left;
+	padding-top:5px;
+	padding-bottom:4px;
+	background-color:#C8EAE0;
+	font-weight:normal;
+	color:#1A4237;
+}
+
+#about table
+	{
+		font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+		width:100%;
+		border-collapse:collapse;
+	}
+#about td, th 
+{
+	font-size:1em;
+	border:1px solid #378E76;
+	padding:3px 7px 2px 7px;
+}
+#about th 
+{
+	font-weight:normal;
+	text-align:left;
+	padding-top:5px;
+	padding-bottom:4px;
+	background-color:#78CAB3;
+	color:#ffffff;
+}
+#about tr.alt td 
+{
+	color:#000000;
+	background-color:#C8EAE0;
+}
+
+	
 .spnLight {
 	color: #72c6ae /*{a-body-link-color}*/;
 	font-weight: bold;

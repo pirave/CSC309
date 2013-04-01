@@ -45,7 +45,7 @@
             <div id='divTweetList' class="ui-block-a">
             	<ul id="tweetlist" data-role="listview" data-split-icon="gear" data-split-theme="d"></ul>
             </div>
-            <div id='divIFrame' class="ui-block-b" style="height: 100%; overflow: scroll; float:right">
+            <div align ='' id='divIFrame' class="ui-block-b" style="height: 100%; float:right">
             	<iframe id = "iframe" src="" name="iframe" width="100%" height="100%"></iframe>
             </div>
 			
@@ -64,18 +64,45 @@
 	<div data-role="header" data-position="fixed">
 		<a href="#home" data-role="button" data-transition="slidefade" data-direction="reverse">Home</a>
 		<h1>Tweet'kl Stars</h1>
+		
 	</div><!-- /header -->
 
 	<div data-role="content">
+		<h1>Welcome to Tweetk'l Stars</h1>
+		<p>The Tweetk'l Stars client reads a local JSON file and presents the information intuitively on a graphicly pleasing interface.</p>
+		<p>The client adheres to Responsive Design principles by providing at 2 layouts depending on the width of the browser window. It is capable of managing a large number of favorites. Any links included in tweets can be opened in a new window or iframe.</p>
 		
+		<table>
+		<tr>
+			<th>Student</th>
+			<th>CDF Username</th>
+			<th>Student Number</th>
+		</tr>
+		<tr>
+			<td>Pirave Eahalaivan</td>
+			<td>c2eahala</td>
+			<td>998152136</td>
+		</tr>
+		<tr class="alt">
+			<td>Karthig Balendran</td>
+			<td>c2balend</td>
+			<td>999419384</td>
+		</tr>
+		
+		<tr>
+			<td>Malithi Gamage</td>
+			<td>c2gamage</td>
+			<td>998200931</td>
+			
+		</tr>
+	</table>
+
 	</div><!-- /content -->
 
 	<div data-role="footer" data-position="fixed">
 		<div data-role="navbar">
         <ul>
-          <li><a href="#" data-icon="arrow-u" class="ui-btn-active ui-state-persist">Karthig</a></li>
-          <li><a href="#" data-icon="arrow-u">Malithi</a></li>
-          <li><a href="#" data-icon="arrow-u">Pirave</a></li>
+          <li><a href="#" data-icon="arrow-u" class="ui-btn-active ui-state-persist">About</a></li>
         </ul>
       </div>
 	</div><!-- /footer -->
@@ -90,9 +117,36 @@
 	</div><!-- /header -->
 
 	<div data-role="content">	
+		<h2> Assignment 3 : My favorite things</h2>
+		
+
+			<p class='title'>Menu</p>
+			<p>To open the panel containing, <b> start, information </b>and <b> about </b>links, click on the Menu button on the main navigation window</p>
+			
+			<p class='title'>Start</p>
+			<p>To open the main page which contains the favourite tweets and details about users, click on the <b> Start </b>  button</p>
+			
+			<p class='title'>Tweet and user Info</p>
+			<p>To view tweets in greater details, click the  <b> gear icon </b> to the right</p>
+			
+			<p class='title'>View Links</p>
+			<p>In both modes, referenced pages can be opened by first selecting the gear button, then selecting <b>open </b> or by clicking on the tweet.</p>
+			<p>If in landscape mode, selecting the tweet will reveal the referenced page in an iframe.</p>
+			
+			<p class='title'>Pagination<p>
+			<p>Navigate through pages of your favourited tweets using the slider located at the bottom of the screen.</p>
+
 	
 	</div><!-- /content -->
-
+	
+	<div data-role="footer" data-position="fixed">
+		<div data-role="navbar">
+        <ul>
+          <li><a href="#" data-icon="arrow-u" class="ui-btn-active ui-state-persist">Instructions</a></li>
+        </ul>
+      </div>
+	</div><!-- /footer -->
+	
 </div><!-- /page -->
 
 <script src="js/scripts.js"></script>

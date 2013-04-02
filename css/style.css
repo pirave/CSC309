@@ -19,6 +19,7 @@ div.ui-slider { margin-left: 1%; width: 96%; }
 
 #howto p{
 padding-left:10px;
+font-weight:200;
 }	
 #howto p.title{
 	
@@ -27,13 +28,12 @@ padding-left:10px;
 	padding-top:5px;
 	padding-bottom:4px;
 	background-color:#C8EAE0;
-	font-weight:normal;
+	font-weight:bold;
 	color:#1A4237;
 }
 
 #about table
 	{
-		font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
 		width:100%;
 		border-collapse:collapse;
 	}
@@ -58,6 +58,7 @@ padding-left:10px;
 	background-color:#C8EAE0;
 }
 
+#about p{font-weight:200;}
 	
 .spnLight {
 	color: #72c6ae /*{a-body-link-color}*/;

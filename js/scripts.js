@@ -50,7 +50,7 @@ $( "#home" ).on('pageinit', function(){
         this.link = exists(this.urls[0], 0) ? this.urls[0].url : '#';
     }
 
-    $.getJSON("favs-more.json",function (data) {
+    $.getJSON("favs.json",function (data) {
         tweetsData = new Array();
         $.each(data, function(i, tw){
             tweetsData[i] = new tweet(tw);

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html> 
+<head> 
+	<title>Tweet'kl Stars</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<link rel="stylesheet" type="text/css" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.css">
+	<link rel="stylesheet" href="css/jquery.mobile.custom.css" />  <!-- GRAPHITE -->
+	<link rel="stylesheet" href="css/style.css" />
+	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
+</head> 
+<body> 
+
+<div data-role="page" id="home" class="jqm-demos">
+	<div data-role="content">
+		<h1> Welcome To Tweet'kl Stars </h1>
+
+		<img src="css/images/Twitter_Bird.svg" id="imgBird"/>
+
+		<div data-role="popup" id="popupMenu" data-corners="false" data-theme="none" data-shadow="false" data-tolerance="0,0">
+
+		    <a href="#favs" data-icon="star" data-theme="c" data-role="button" id="btnFavs">Start</a>
+		    <a href="#howto" data-icon="info" data-theme="c" data-role="button">Instructions</a>
+		    <a href="#about" data-icon="gear" data-theme="c" data-role="button">About</a>
+			 
+		</div>
+	</div><!-- /content -->
+	<div data-role="footer" data-position="fixed" class="ui-btn-active ui-state-persist">	
+		<ul class="ui-navbar" id="listMenu"><li>
+			<a id = "btnMenu" href="#popupMenu" data-rel="popup" data-transition="slide" data-position-to="window" data-icon="grid" data-role="button" class="ui-btn" data-role="button">Menu</a>
+		</li></ul>
+	</div><!-- /footer -->
+</div><!-- /page -->
+	
+
+<div data-role="page" id="favs">
+
+	<div data-role="header" data-position="fixed">
+		<a href="#home" data-role="button" data-transition="slidefade" data-direction="reverse">Home</a>
+		<h1>Tweet'kl Stars</h1>
+	</div><!-- /header -->
+
+	<div data-role="content" id="favsContent">
+		<div class="ui-grid-a" id="custom-grid">
+            <div id='divTweetList' class="ui-block-a">
+            	<ul id="tweetlist" data-role="listview" data-split-icon="gear" data-split-theme="d"></ul>
+            </div>
+            <div align ='' id='divIFrame' class="ui-block-b" style="height: 100%; float:right">
+            	<iframe id = "iframe" src="" name="iframe" width="100%" height="100%"></iframe>
+            </div>
+			
+		</div>
+
+	</div><!-- /content -->
+
+	<div id='footer' data-role="footer" data-position="fixed" class="ui-bar">
+		<input data-theme="d" type="range" name="slider" id="slider" value="1" min="1" max="100" data-highlight="true" data-track-theme="d"/>
+	</div><!-- /footer -->
+
+</div><!-- /page -->
+
+<div data-role="page" id="about">
+
+	<div data-role="header" data-position="fixed">
+		<a href="#home" data-role="button" data-transition="slidefade" data-direction="reverse">Home</a>
+		<h1>Tweet'kl Stars</h1>
+		
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<h1>Welcome to Tweet'kl Stars</h1>
+		<p>The Tweet'kl Stars client reads a local JSON file and presents the information intuitively on a graphicly pleasing interface.</p>
+		<p>The client adheres to Responsive Design principles by providing at 2 layouts depending on the width of the browser window. It is capable of managing a large number of favorites. Any links included in tweets can be opened in a new window or iFrame.</p>
+		
+		<table>
+		<tr>
+			<th>Student</th>
+			<th>CDF Username</th>
+			<th>Student Number</th>
+		</tr>
+		<tr>
+			<td>Pirave Eahalaivan</td>
+			<td>c2eahala</td>
+			<td>998152136</td>
+		</tr>
+		<tr class="alt">
+			<td>Karthig Balendran</td>
+			<td>c2balend</td>
+			<td>999419384</td>
+		</tr>
+
+		<tr>
+			<td>Malithi Gamage</td>
+			<td>c2gamage</td>
+			<td>998200931</td>
+			
+		</tr>
+	</table>
+
+	</div><!-- /content -->
+
+	<div data-role="footer" data-position="fixed">
+		<div data-role="navbar">
+        <ul>
+          <li><a href="#" data-icon="arrow-u" class="ui-btn-active ui-state-persist">About</a></li>
+        </ul>
+      </div>
+	</div><!-- /footer -->
+	<div data-role="footer" data-position="fixed"></div><!-- /footer -->
+
+</div><!-- /page -->
+
+<div data-role="page" id="howto">
+
+	<div data-role="header" data-position="fixed">
+		<a href="#home" data-role="button" data-transition="slidefade" data-direction="reverse">Home</a>
+		<h1>Tweet'kl Stars</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">	
+		<h2> Assignment 3: My Favorite Things</h2>
+		
+
+			<p class='title'>Menu</p>
+			<p>To open the panel containing the <b> Start, Information </b>and <b> About </b>links, click on the Menu button on the main navigation window</p>
+			
+			<p class='title'>Start</p>
+			<p>To open the main page which contains the favourite tweets and details about users, click on the <b> Start </b>  button</p>
+			
+			<p class='title'>Tweet and User Info</p>
+			<p>To view tweets in greater details, click the  <b> gear icon </b> to the right. You will also see extra info about the user, such as full name and follower count, here.</p>
+			
+			<p class='title'>View Links</p>
+			<p>In both modes, referenced pages can be opened by first selecting the gear button, then selecting <b>open </b>.</p>
+			<p>If in landscape mode, selecting the tweet will reveal the referenced page in an iFrame.</p>
+			
+			<p class='title'>Pagination<p>
+			<p>Navigate through pages of your favourited tweets using the slider located at the bottom of the screen.</p>
+
+
+	<div data-role="content">
+
+	
+	</div><!-- /content -->
+	
+	<div data-role="footer" data-position="fixed">
+		<div data-role="navbar">
+        <ul>
+          <li><a href="#" data-icon="arrow-u" class="ui-btn-active ui-state-persist">Instructions</a></li>
+        </ul>
+      </div>
+	</div><!-- /footer -->
+	
+</div><!-- /page -->
+
+<script src="js/scripts.js"></script>
+</body>
+</html>

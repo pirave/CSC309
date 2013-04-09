@@ -1,0 +1,173 @@
+/*#home{
+	background: #fff;
+}*/
+body {
+    font-family: "Open Sans" !important;
+    font-weight: normal !important;
+  }
+  
+div.ui-slider { margin-left: 1%; width: 96%; }
+
+#favs div.ui-btn-down-d { background: #fff; }
+
+#favs div.ui-btn-active { background: #e0e0e0; }
+
+#favs input.ui-disabled{
+	   opacity:1;
+	   
+    }
+
+#howto p{
+padding-left:10px;
+font-weight:200;
+}	
+#howto p.title{
+	
+	font-size:1.1em;
+	text-align:left;
+	padding-top:5px;
+	padding-bottom:4px;
+	background-color:#C8EAE0;
+	font-weight:bold;
+	color:#1A4237;
+}
+
+#about table
+	{
+		width:100%;
+		border-collapse:collapse;
+	}
+#about td, th 
+{
+	font-size:1em;
+	border:1px solid #378E76;
+	padding:3px 7px 2px 7px;
+}
+#about th 
+{
+	font-weight:normal;
+	text-align:left;
+	padding-top:5px;
+	padding-bottom:4px;
+	background-color:#78CAB3;
+	color:#ffffff;
+}
+#about tr.alt td 
+{
+	color:#000000;
+	background-color:#C8EAE0;
+}
+
+#about p{font-weight:200;}
+	
+.spnLight {
+	color: #72c6ae /*{a-body-link-color}*/;
+	font-weight: bold;
+}
+.popupTweet{
+	font-weight: 200;
+	color:#555;
+	font-size: 12px; 
+}
+.popupTweet .spnLight{
+	color: #259375;
+	font-weight: 200;
+}
+.spnPopupTime{
+	font-size: 10px;
+	color:#999;
+	font-weight: 200;
+	padding-bottom: 8px;
+}
+.spnPopupUserName{
+	color: #72c6ae /*{a-body-link-color}*/;
+	font-weight: 300;
+}
+.spnPopupUserHandle{
+	font-weight: bold;
+	font-size: 10px;
+	color:#555;
+}
+.spnPopupUserFls{
+	font-weight: 200;
+	color:#555;
+	font-size: 10px;
+}
+.spnPopupStats{
+	font-size:10px;
+	color:#999;
+	font-weight: 200;
+	float:left;
+}
+.spnPopupOpen{
+	float:right;
+	margin-top: -10px;
+}
+.divPopupFooter{
+	padding-top: 11px;
+	border: 1px solid #e8e8e8;
+	border-width: 1px 0 0;
+}
+.profilePic{
+	display: block;
+	margin-left: auto;
+	width: 80px;
+	height:80px;
+}
+.tweetItem{
+	background: #fff;
+}
+#imgBird{
+	-webkit-filter: drop-shadow(0px 2px 3px #555);
+	filter: drop-shadow(0px 2px 3px #555);
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width:100%;
+}
+#popupMenu-popup {
+    right: 0 !important;
+    left: auto !important;
+}
+#popupMenu {
+    width: 200px;
+    border: 1px solid #000;
+    border-right: none;
+    background: rgba(0,0,0,.5);
+    margin: -1px 0;
+}
+#popupMenu .ui-btn {
+    margin: 2em 15px;
+}
+#btnMenu{
+	background: 			#72c6ae /*{global-active-background-color}*/;
+	font-weight: bold;
+	color: 					#fff /*{global-active-color}*/;
+	cursor: pointer;
+	width: 100% !important;
+	text-decoration: none;
+	padding: 15px;
+}
+#listMenu{
+	list-style-type: none;
+}
+.btnOpen{
+	margin-bottom:-10px;
+}
+.ui-icon{
+	background-color: transparent;
+	box-shadow: none;
+}
+#favsContent { padding: 0px; }
+.ui-grid-a .ui-block-a { width: 30%; }
+.ui-grid-a .ui-block-b { width: 70%; } 
+
+#tweetlist, a.tweetInfo{
+	margin: 0px !important;
+}
+.fixedPosition {
+	position: fixed;
+}
+#home ul{
+	margin: 0px !important;
+}

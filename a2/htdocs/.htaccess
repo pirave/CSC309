@@ -1,0 +1,4 @@
+RewriteEngine on
+RewriteRule ^blogs/trends/?$        index.php?all=1         [QSA]
+RewriteRule ^blog/(.+)/trends/?$    index.php?all=0&id=$1   [QSA]
+RewriteRule ^blog/?$                index.php               [L]

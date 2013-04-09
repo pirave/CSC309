@@ -1,0 +1,180 @@
+<html>
+<head>
+	<title>A2: ReadMe</title>
+	<style>
+	html, body {
+		font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+		width:960px;
+		margin: 0 auto;
+	}
+	table
+	{
+		font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+		width:100%;
+		border-collapse:collapse;
+	}
+	td, th 
+	{
+		font-size:1em;
+		border:1px solid #00A2E8;
+		padding:3px 7px 2px 7px;
+	}
+	 th 
+	{
+		font-size:1.1em;
+		text-align:left;
+		padding-top:5px;
+		padding-bottom:4px;
+		background-color:#10A9EB;
+		color:#ffffff;
+	}
+	 tr.alt td 
+	{
+		color:#000000;
+		background-color:#D6EDF7;
+	}
+	ul {list-style-type: none;}
+	#port
+	{ color:#00A2E8;}
+	li.dir
+	{ color:#00A2E8;}
+	li.file
+	{ color:#000;}
+	pre{font-size: .9em;}
+	a{
+		color: #00A2E8;
+		text-decoration: none;
+	}
+	a:visited{
+		color:#00A2E8;
+	}
+	a:hover{
+		text-decoration: underline;
+	}
+	span.exp{
+		color:#777;
+		font-size:0.8em;
+		font-style:italic;
+	}
+	img{
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	</style>
+</head>
+<body>
+	<br>
+	<h1>Assignment 2: Trends in Tumblr</h1>
+	<div id="port">Port: 31040 <br> CDF environement:  redwolf</div>
+	<br>
+	<table>
+		<tr>
+			<th>Student</th>
+			<th>CDF Username</th>
+			<th>Student Number</th>
+		</tr>
+		<tr>
+			<td>Malithi Gamage</td>
+			<td>c2gamage</td>
+			<td>998200931</td>
+			
+		</tr>
+		<tr class="alt">
+			<td>Pirave Eahalaivan</td>
+			<td>c2eahala</td>
+			<td>998152136	</td>
+		</tr>
+		<tr>
+			<td>Karthig Balendran</td>
+			<td>c2balend</td>
+			<td>999419384</td>
+		</tr>
+	</table>
+
+
+	<br><p>
+		<table><th>Database Scheme</th></table> <br>
+		<img src="./eer.png">
+		<pre>
+CREATE TABLE IF NOT EXISTS posts (
+    pid VARCHAR(255) NOT NULL,
+    url VARCHAR(255) NOT NULL,
+    text VARCHAR(255),
+    image VARCHAR(255),
+    last_track TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    date TIMESTAMP NOT NULL, 
+    last_count INT NOT NULL,
+    blog_name VARCHAR(255) NOT NULL,
+    PRIMARY KEY (pid)
+)
+
+CREATE TABLE IF NOT EXISTS blogs (
+    bid VARCHAR(255) NOT NULL,
+    pid VARCHAR(255) NOT NULL,
+    PRIMARY KEY (bid,pid),
+    FOREIGN KEY (pid) REFERENCES posts(pid)
+)
+
+CREATE TABLE IF NOT EXISTS tracks (
+    pid VARCHAR(255) NOT NULL,
+    seq INT NOT NULL AUTO_INCREMENT,
+    time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    inc INT NOT NULL,
+    count INT NOT NULL,
+    PRIMARY KEY (pid,seq),
+    FOREIGN KEY (pid) REFERENCES posts(pid) ON DELETE CASCADE
+)
+		</pre>
+	</p>
+
+	<p>
+		<table><th>API Calls</th></table><br>
+		We make two API calls to Tumblr, <a href="http://www.tumblr.com/docs/en/api/v2#blog-likes">likes</a> and <a href="http://www.tumblr.com/docs/en/api/v2#posts">posts</a>.
+	</p>
+	<p>
+		<table><th>Code Organization</th></table>
+		<ul>
+			<li class="file"> index.php <span class="exp">main script which creates an instance of server to serve the client request (in server.php)</span></li>
+			<li class="dir">/api
+				<ul>
+					<li class="file">server.php <span class="exp">essentially a router which directs the requests to the correct handlers (new blog or get trends)</span></li>
+					<li class="file">blogs.php <span class="exp">tracks a new blog when a POST request is made</span></li>
+					<li class="file">trends.php <span class="exp">returns the JSON for the GET request</span></li>
+					<li class="file">response.php <span class="exp">helper to respond with the JSON</span></li>
+				</ul>	
+			</li>
+			<li class="dir">/lib
+				<ul>
+					<li class="file">database.php <span class="exp">layer between MySQL and the server which initializes connections and makes queries</span></li>
+					<li class="file">queires.php <span class="exp">holds common Query strings (for ease of access)</span></li>
+					<li class="file">tumblr.php <span class="exp">makes all API calls to tumblr and extracts relevant info</span></li>
+				</ul>	
+			</li>
+			<li class="dir">/tracker
+				<ul>
+					<li class="file">tracker.php <span class="exp">hourly script to be run</span></li>
+				</ul>
+			</li>
+		</ul>
+	</p>
+	
+	<p>
+		<table><th>Sequence Diagrams</th></table><br>
+		<img src="seqGET.png"><br>
+		<img src="seqPOST.png"><br>
+		<img src="seqTRACKER.png">
+	</p>
+	<table><th>Additional Information</th></table>
+	<ul>
+		<li>If the limit is not specified, the default value is set to 10</li>
+		<li>If the order is not specified, the default value is set to "trending"</li>
+		<li>If the order is neither "trending" nor "recent" 404 is sent</li>
+		<li>If the blog requested is not valid 404 is sent</li>
+		<li>If the title of a post is not available the slug is used</li>
+		<li>If an image is not available we default to <a href="http://i.imgur.com/jzxRoWR.png"> this </a></li>
+		<li>Crons is run every hour on the hour: <tt> 0 * * * * php -f tracker.php</tt></li>
+	
+	</ul>
+</body>
+</html>

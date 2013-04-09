@@ -1,0 +1,331 @@
+html{
+	overflow-y:scroll;
+}
+
+body {
+	/*background: #002346;*/
+	background: #e6e6e6;
+	font-family: 'ARVO', serif;
+	font-size: 16px;
+	color: #444;
+}
+
+input, button , textarea{
+	font-family: 'ARVO', serif;
+}
+
+a{
+	cursor: pointer;
+}
+
+#wrapper{
+	width: 1040px;
+	margin: 0 auto;
+}
+
+#create-wrapper{
+	width: 1030px;
+	margin: 0 auto;
+}
+
+#posts-wrapper{
+	width: 1040px;
+	margin: 0 auto;
+	background: white;
+	color: #515151;
+	box-shadow: 0px 2px 6px rgba(100, 100, 100, 0.3);
+}
+
+#title{
+	font-size: 40px;
+	width: 300px;
+	margin: 0 auto;
+	text-shadow: 0 1px 2px #f8f8f8;
+}
+
+#subtitle{
+	font-size: 10px;
+	width: 200px;
+	margin: 0 auto;
+	text-shadow: 0 1px 2px #f8f8f8;
+}
+
+#posts-wrapper .clear{
+	height: 15px;
+}
+
+#txtPost, #txtURL{
+	padding: 2px;
+	font-size: 14px;
+	height: 1.3em;
+	line-height: 1;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-ms-border-radius: 3px;
+	-o-border-radius: 3px;
+	border-radius: 3px;
+}
+#txtPost{
+	width: 75%;
+}
+
+#txtURL{
+	width: 15%;
+}
+
+#btnSort {
+	background: #e3e3e3;
+	border: 1px solid #bbb;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	-ms-border-radius: 2px;
+	-o-border-radius: 2px;
+	border-radius: 2px;
+	-webkit-box-shadow: inset 0 0 1px 1px #f6f6f6;
+	-moz-box-shadow: inset 0 0 1px 1px #f6f6f6;
+	-ms-box-shadow: inset 0 0 1px 1px #f6f6f6;
+	-o-box-shadow: inset 0 0 1px 1px #f6f6f6;
+	box-shadow: inset 0 0 1px 1px #f6f6f6;
+	color: #333;
+	line-height: 1;
+	font-size: 1.0em;
+	padding: 3px 0 4px;
+	text-align: center;
+	text-shadow: 0 1px 2px #f8f8f8;
+	/*display: block;*/
+	margin: 10px auto;
+	width:10%;
+}
+
+
+#btnHelp {
+	background: #e3e3e3;
+	border: 1px solid #bbb;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	-ms-border-radius: 2px;
+	-o-border-radius: 2px;
+	border-radius: 2px;
+	-webkit-box-shadow: inset 0 0 1px 1px #f6f6f6;
+	-moz-box-shadow: inset 0 0 1px 1px #f6f6f6;
+	-ms-box-shadow: inset 0 0 1px 1px #f6f6f6;
+	-o-box-shadow: inset 0 0 1px 1px #f6f6f6;
+	box-shadow: inset 0 0 1px 1px #f6f6f6;
+	color: #333;
+	line-height: 1;
+	font-size: 1.0em;
+	padding: 3px 0 4px;
+	text-align: center;
+	text-shadow: 0 1px 2px #f8f8f8;
+	/*display: block;*/
+	margin: 12px auto;
+	width:12%;
+}
+
+#btnPost {
+	background: #e3e3e3;
+	border: 1px solid #bbb;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-ms-border-radius: 3px;
+	-o-border-radius: 3px;
+	border-radius: 3px;
+	-webkit-box-shadow: inset 0 0 1px 1px #f6f6f6;
+	-moz-box-shadow: inset 0 0 1px 1px #f6f6f6;
+	-ms-box-shadow: inset 0 0 1px 1px #f6f6f6;
+	-o-box-shadow: inset 0 0 1px 1px #f6f6f6;
+	box-shadow: inset 0 0 1px 1px #f6f6f6;
+	color: #333;
+	line-height: 1;
+	font-size: 1.2em;
+	padding: 4px 0 5px;
+	text-align: center;
+	text-shadow: 0 1px 2px #f8f8f8;
+	/*display: block;*/
+	margin: 10px auto;
+	width:7%;
+}
+
+#btnSort:hover {
+	background: #d9d9d9;
+	-webkit-box-shadow: inset 0 0 1px 1px #eaeaea;
+	-moz-box-shadow: inset 0 0 1px 1px #eaeaea;
+	-ms-box-shadow: inset 0 0 1px 1px #eaeaea;
+	-o-box-shadow: inset 0 0 1px 1px #eaeaea;
+	box-shadow: inset 0 0 1px 1px #eaeaea;
+	color: #222;
+	cursor: pointer; 
+}
+
+#btnSort:active {
+	background: #d0d0d0;
+	-webkit-box-shadow: inset 0 0 1px 1px #e3e3e3;
+	-moz-box-shadow: inset 0 0 1px 1px #e3e3e3;
+	-ms-box-shadow: inset 0 0 1px 1px #e3e3e3;
+	-o-box-shadow: inset 0 0 1px 1px #e3e3e3;
+	box-shadow: inset 0 0 1px 1px #e3e3e3;
+	color: #000;
+}
+
+
+#btnPost:hover {
+	background: #d9d9d9;
+	-webkit-box-shadow: inset 0 0 1px 1px #eaeaea;
+	-moz-box-shadow: inset 0 0 1px 1px #eaeaea;
+	-ms-box-shadow: inset 0 0 1px 1px #eaeaea;
+	-o-box-shadow: inset 0 0 1px 1px #eaeaea;
+	box-shadow: inset 0 0 1px 1px #eaeaea;
+	color: #222;
+	cursor: pointer; 
+}
+
+#btnPost:active {
+	background: #d0d0d0;
+	-webkit-box-shadow: inset 0 0 1px 1px #e3e3e3;
+	-moz-box-shadow: inset 0 0 1px 1px #e3e3e3;
+	-ms-box-shadow: inset 0 0 1px 1px #e3e3e3;
+	-o-box-shadow: inset 0 0 1px 1px #e3e3e3;
+	box-shadow: inset 0 0 1px 1px #e3e3e3;
+	color: #000;
+}
+
+
+#btnHelp:hover {
+	background: #d9d9d9;
+	-webkit-box-shadow: inset 0 0 1px 1px #eaeaea;
+	-moz-box-shadow: inset 0 0 1px 1px #eaeaea;
+	-ms-box-shadow: inset 0 0 1px 1px #eaeaea;
+	-o-box-shadow: inset 0 0 1px 1px #eaeaea;
+	box-shadow: inset 0 0 1px 1px #eaeaea;
+	color: #222;
+	cursor: pointer; 
+}
+
+#btnHelp:active {
+	background: #d0d0d0;
+	-webkit-box-shadow: inset 0 0 1px 1px #e3e3e3;
+	-moz-box-shadow: inset 0 0 1px 1px #e3e3e3;
+	-ms-box-shadow: inset 0 0 1px 1px #e3e3e3;
+	-o-box-shadow: inset 0 0 1px 1px #e3e3e3;
+	box-shadow: inset 0 0 1px 1px #e3e3e3;
+	color: #000;
+}
+
+.post{
+	width: 960px;
+	margin: 0 auto;
+	border-bottom-style: solid;
+	border-width: 1px;
+	border-color: #ededed;
+	padding: 10px 3px 3px;
+}
+
+.post .title{
+	font-size: 20px;
+	margin-bottom:10px;
+}
+
+.post .title .topic-link{
+	color: #21759B;
+	font-size: 12px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.post .title a{
+	text-decoration: none;
+	color: #515151;
+}
+
+.post .title a:hover{
+	color: #372525;
+}
+
+.post .title .display-comments{
+	color: #21759B;
+	font-size: 12px;
+	float: right;
+}
+
+.post .title .post-info {
+	color: #6a6a6a;
+	font-size: 12px;
+	font-family: 'Ubuntu', sans-serif;
+}
+
+.post .replies{
+	margin: 5px;
+	font-size: 14px;
+	overflow:hidden;
+}
+
+.post .reply-wrapper {
+	margin-left: 40px;
+	margin-top: 15px;
+	margin-bottom: 5px;
+	overflow:hidden;
+	border-left-style: solid;
+	border-width: 1px;
+	border-color: #ededed;
+}
+
+.post .reply-wrapper .reply-info{
+	color: #6a6a6a;
+	font-size: 12px;
+	font-family: 'Ubuntu', sans-serif;
+}
+.post .reply-wrapper .reply-content{
+	padding-left: 20px;
+}
+
+.post .reply-wrapper .btnReply{
+	padding-left:20px;
+	font-family: 'Ubuntu', sans-serif;
+	color: #999;
+	font-size: 12px;
+}
+.post .reply-wrapper .btnReply:hover{
+	color: #21759B;
+	text-decoration: underline;
+}
+
+.post .title .points .btnReply{
+	font-family: 'Ubuntu', sans-serif;
+	color: #6a6a6a;
+	font-size: 12px;
+}
+.post .title .points .btnReply:hover{
+	color: #21759B;
+	text-decoration: underline;
+}
+
+#comment{
+	margin: 10px;
+	width: 90%;
+}
+.post .reply-wrapper .vote-up{
+	text-decoration: none;
+	color: #ededed;
+}
+
+.post .reply-wrapper .vote-up:hover{
+	color: #999;
+}
+
+.post .reply-wrapper .vote-up:active{
+	color: #444
+}
+
+textarea{
+	width: 100%;
+	height:100px;
+}
+
+.time {
+	padding:0px 10px 0px 2px;
+}
+
+.points {
+	padding-left: 10px;
+	padding-right: 10px;
+}

@@ -1,0 +1,113 @@
+echo "open localhost 31040"
+sleep 1
+echo "PUT /newpost?topic=Movies&url=www%2Eimdb%2Ecom HTTP/1.1"
+echo "Host: localhost"
+echo
+echo
+sleep 1
+echo "PUT /newpost?topic=Cool%20Site%20for%20Music&url=www%2Emtv%2Ecom HTTP/1.1"
+echo "Host: localhost"
+echo
+echo
+sleep 1
+echo "PUT /newpost?topic=Hungry%3F%20Go%20here%21&url=www%2EAllRecipes%2Ecom HTTP/1.1"
+echo "Host: localhost"
+echo
+echo
+sleep 1
+echo "PUT /newpost?topic=Search&url=www%2Egoogle%2Ecom HTTP/1.1"
+echo "Host: localhost"
+echo
+echo
+sleep 1
+echo "PUT /newpost?topic=Connect%20with%20old%20friends&url=www%2Efacebook%2Ecom HTTP/1.1"
+echo "Host: localhost"
+echo
+echo
+sleep 1
+
+echo "PUT /newreply?reply=COOL%21&parent=p1 HTTP/1.1"
+echo "Host: localhost"
+echo
+echo
+sleep 1
+echo "PUT /newreply?reply=I%20hate%20it&parent=p2 HTTP/1.1"
+echo "Host: localhost"
+echo
+echo
+sleep 1
+echo "PUT /newreply?reply=is%20that%20all%3F&parent=p3 HTTP/1.1"
+echo "Host: localhost"
+echo
+echo
+sleep 1
+echo "PUT /newreply?reply=I%27ve%20seen%20this%20before%2E%20Meh%2E&parent=p5 HTTP/1.1"
+echo "Host: localhost"
+echo
+echo
+sleep 1
+echo "PUT /newreply?reply=Are%20you%20serious%3F%21%20That%20sux%21%21%21&parent=p1r1 HTTP/1.1"
+echo "Host: localhost"
+echo
+echo
+sleep 1
+echo "PUT /newreply?reply=I%27m%20always%20serious&parent=p1r1r1 HTTP/1.1"
+echo "Host: localhost"
+echo
+echo
+sleep 1
+echo "PUT /newreply?reply=loser&parent=p1r1r1r1 HTTP/1.1"
+echo "Host: localhost"
+echo
+echo
+sleep 1
+echo "PUT /newreply?reply=Ditto&parent=p2r1 HTTP/1.1"
+echo "Host: localhost"
+echo
+echo
+sleep 1
+echo "PUT /newreply?reply=Very%20cool%21&parent=p3 HTTP/1.1"
+echo "Host: localhost"
+echo
+echo
+sleep 1
+echo "PUT /vote?reply=p1r1r1r1 HTTP/1.1"
+echo "Host: localhost"
+echo
+echo
+sleep 1
+echo "PUT /vote?reply=p1r1r1r1 HTTP/1.1"
+echo "Host: localhost"
+echo
+echo
+sleep 1
+echo "PUT /vote?reply=p1r1r1r1 HTTP/1.1"
+echo "Host: localhost"
+echo
+echo
+sleep 1
+echo "PUT /vote?reply=p2r1 HTTP/1.1"
+echo "Host: localhost"
+echo
+echo
+sleep 1
+echo "PUT /vote?reply=p2r1 HTTP/1.1"
+echo "Host: localhost"
+echo
+echo
+sleep 1
+echo "PUT /vote?reply=p2r1 HTTP/1.1"
+echo "Host: localhost"
+echo
+echo
+sleep 1
+echo "PUT /vote?reply=p2r1 HTTP/1.1"
+echo "Host: localhost"
+echo
+echo
+sleep 1
+echo "PUT /vote?reply=p1r1 HTTP/1.1"
+echo "Host: localhost"
+echo
+echo
+sleep 1

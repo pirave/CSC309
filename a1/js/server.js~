@@ -1,0 +1,23 @@
+var http = require("http");
+var url = require("url");
+
+function start(route, handle){
+	//Start server on incoming request
+	function onRequest(request, response){
+
+		request.on('error', function(err) {
+			console.log('problem with request: ' + err.message);
+			console.error(err);
+			response.writeHead(500, {"Content-Type": "text/plain"});
+    		response.end('500 Error: Internal server error');
+			});
+
+		var URL = url.parse(request.url, true);
+		console.log("Request for " + URL.href + " recieved.");
+		route(handle, URL, response);
+	};
+	
+	http.createServer(onRequest).listen(8888);
+};
+
+exports.start = start;
